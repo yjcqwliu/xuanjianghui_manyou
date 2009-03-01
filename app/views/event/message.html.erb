@@ -1,0 +1,45 @@
+<div id="content">
+				<div id="toc">
+					<p class="crumbs">
+						<%= link_to @activity.act_subject, :controller => :event, :action => :show, :id => @activity.id %><span
+							class="pipe"> / </span>留言列表(共<span class="count"><%= @message.length %></span>条留言)
+					</p>
+				</div>
+</div>
+<DIV class="box" id="userTalk">
+              <H3><span style="float:right"><%= link_to "所有留言", {:controller => :event, :action => :message, :id => @activity.id },:name => "message"%></span>留言板 </H3>
+              
+
+<input type="hidden" value='null'/>
+
+
+              
+               
+                        <FORM method="post" name="subjectForm1"  action="event/save_message">
+                   <DIV id="starttalkForm" style="DISPLAY: block">
+                    
+                    <input type="hidden" name="commit[reply_xid]"  id="commit[reply_xid]" value="" /> 
+				    <input type="hidden" name="commit[activity_id]" value="<%= @activity.id %>" /> 
+                    <textarea tabindex="1" rows="4" cols="100" id="commit[content]" name="commit[content]"></textarea>
+					<br>
+                       <input type="submit" class="inputbutton" value="留言" />
+                  </DIV>
+                 
+                </FORM>
+				<div>
+  <center>
+  <%if @page.to_i > 1 then %>
+    <%= link_to "上一页", { :action => controller.action_name, :page => (@page.to_i - 1)}, {:class => "chn"} %>
+  <% else %>
+    上一页
+  <% end %>
+  &nbsp;
+  <%if @page.to_i < @message.total_pages then %>
+    <%= link_to "下一页", { :action => controller.action_name, :page => (@page.to_i + 1)}, {:class => "chn"} %>
+  <% else %>
+    下一页
+  <% end %>
+</center></div>
+		<%= render(:partial => "commit", :object => @message ) %>
+                  
+</DIV>

@@ -1,0 +1,17 @@
+<div style="position:relative;">
+<div id="sub-nav" style="position:relative;">
+						<ul>
+							<li ><%= link_to "我参加的宣讲会",:controller => :home, :action => :my %></li>
+							<li ><%= link_to "正在进行的宣讲会",:controller => :home, :action => :my_start %></li>
+							<li ><%= link_to "已经结束的宣讲会",:controller => :home, :action => :my_timeout %></li>
+</ul>
+</div>
+</div>
+<div id="oak" class="gray clearfix">
+							<div class="pager-top">
+								<span>共 <strong><%= @activity.length %></strong>
+									个活动</span>
+								
+							</div>
+										<%= render(:partial => "partylist", :collection => @activity )%>
+</div>

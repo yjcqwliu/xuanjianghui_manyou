@@ -1,0 +1,91 @@
+<div class="event_header_block clearfix">
+  <h2 class="event_header" style="float:left;font-size:14px;padding:8px 0px 5px 24px;"><%= @act_location %> <a onclick="seeOtherCity();" href="#">查看其它城市的活动</a> </h2>
+ <div class="event_search">
+						<form method="get" action="home">
+
+							<input type="hidden" value="<%= @act_location %>" name="location" />
+							<input type="text" autocomplete="off" id="keywords"
+								name="keywords" class="search_event" />
+							<input name="" type="image" class="search_new_btn"
+								src="http://uchome.developer.manyou.com/uchome/attachment/200901/23/965493_1232699417jAz1.gif" align="absmiddle"
+								style="margin:-1px 0 0 -5px" />
+						</form>
+  </div>
+</div>
+<div style="clear:both"></div>
+<div style="position:relative;">
+<div id="sub-nav" style="position:relative;">
+						<ul>
+						    <% if !@act_location.blank? %>
+							<li class="selected">
+								<a href="#" ><%= @act_location %></a>
+							</li>
+							<% end %>
+							<li >
+								<div class="event_nav_drop">
+									<%= link_to "全部城市", {:controller => :home, :action => :index, :location => ""},:id => "event_drop", :class => "event_nav_link"%>
+								</div>
+
+							</li>
+							
+						</ul>
+
+  </div>
+ </div>
+<div id="oak" class="gray clearfix">
+						<div id="event_left">
+							<div class="pager-top">
+								<span>共 <strong><%= @activity.total_entries %></strong>
+									个活动</span>								
+							</div>
+
+										<%= render(:partial => "partylist", :collection => @activity )%>
+							<div>
+  <center>
+  <%if @page.to_i > 1 then %>
+    <%= link_to "上一页", { :action => controller.action_name, :page => (@page.to_i - 1),:location => @act_location, :keywords => @keywords, :time_select => @time_select}, {:class => "chn"} %>
+  <% else %>
+    上一页
+  <% end %>
+  &nbsp;
+  <%if @page.to_i < @activity.total_pages then %>
+    <%= link_to "下一页", { :action => controller.action_name, :page => (@page.to_i + 1),:location => @act_location, :keywords => @keywords, :time_select => @time_select}, {:class => "chn"} %>
+  <% else %>
+    下一页
+  <% end %>
+</center></div>
+</div>
+<div id="event_right">
+							<h2>
+								条件筛选
+							</h2>
+
+							<form method="GET" id="time_select_form" name="time_select_form" action="/">
+
+								<input type="hidden" name="act_location" id="act_location"
+									value="<%= @act_location %>">
+                                      <input type="hidden" name="keywords" id="keywords"
+									value="<%= @keywords %>">
+                                      <input type="hidden" name="keywords" id="keywords"
+									value="<%= @keywords %>">
+								<label>
+									活动时间：
+								</label>
+								<select onchange="chgunivright()" name="time_select" id="time_select"
+									class="inputtext">
+
+									<option 
+										value="7">
+										一周内
+									</option>
+									<option  value="31"  <% if @time_select.to_i == 31 -%>selected="selected"<% end -%> >
+										一个月内
+									</option>
+									<option  value="93" <% if @time_select.to_i == 93 %>selected="selected"<% end %> >
+										三个月内
+									</option>
+
+								</select>
+							</form>
+						</div>
+</div>

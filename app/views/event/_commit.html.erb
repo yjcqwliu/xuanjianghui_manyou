@@ -1,0 +1,38 @@
+<OL id="talk">
+                    <%
+					 i = 0
+					 commit.each do |m| 
+					 i += 1
+					 %>
+                      <LI id="ev<%= m.id %>">
+                        
+                        <DIV class="article"
+																id="comment_21868_357_0_0_0_236199881">
+                        <P class="picture"> <SPAN class="thumbpic"><my:profile-pic uid="<%= m.sns_user_xid %>" linked="true" /></SPAN> </P>
+                        
+                        <div class="info">
+                          <SPAN class="author"><my:name uid="<%= m.sns_user_xid %>"  linked="true"/>
+                          </SPAN>
+                          
+                            <div class="switch"> <a  id="switch_357">&nbsp;</a> </div>
+                          
+                          
+                          
+                              
+                            
+                          <SPAN class="time">
+                          <%= m.created_at.strftime("%m-%d %H:%M") %>
+                          </SPAN> <a href="#message" onclick="reply_message('<%= m.sns_user_xid %>','<%= m.id %>')">回复</a></DIV>
+                        
+                         
+                        <DIV class="text"><%=h m.content %></div>
+                        
+                        </DIV>
+                      </li>
+                      
+                    <%
+					if controller.action_name == "show" and i == 10
+						break
+					end
+					 end %>
+                  </OL>  

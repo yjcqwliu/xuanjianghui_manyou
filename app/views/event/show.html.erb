@@ -1,0 +1,128 @@
+<div id="opi" class="page-wrapper clearfix">
+		<div class="full-page-holder">
+			<div class="clearfix">
+				<div >
+			<div>
+   
+       <div class="grayheader clearfix" style="height:34px">
+        <div class="left_side" >
+          <h2> <%= @activity.act_subject %> </h2>
+        </div>
+      </div>
+      <div id="event" class="clearfix ">
+        <div class="left" id="eventDetail">
+          <div class="box">
+            <h3> 活动信息 </h3>
+            
+            <div class="boxcont">
+              <table class="info_table">
+              <tr>
+                  <td class="label"> 活动时间: </td>
+                  <td><div class="datawrap"><%= @activity.start_time %> 至 <%= @activity.end_time %> </div></td>
+                </tr>
+                <tr>
+                  <td class="label"> 活动地点: </td>
+                  <td><div class="datawrap"><%= @activity.act_place %></div></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="box">
+            <h3> 活动介绍 </h3>
+            <div class="boxcont">
+              <div class="description">
+			  
+                 <span id="gut_display">
+                    <% if @activity.act_text %>
+                      <%= truncate(h(@activity.act_text.act_description.chars),400).gsub("\n","<br>")%>
+                    <% end %>
+                    </span>
+                    <br>
+				 
+                  <span id="to_show_more" ><a href="http://www.iease.com.cn/events/<%= @activity.id %>" target="_blank">查看详情</a></span>
+              </div>
+            </div>
+          </div>
+            <div class="box">
+              <h3> 参加这个活动的成员 </h3>
+              <div class="subheader clearfix">
+                <div style="float: left; color: #333333"> <span id="membercount"><%= @activity.join_user.length %></span> 人关注</div>
+                <div style="float: right;"><%= link_to "查看全部", :controller => :event ,:action => :userlist, :id => @activity.id %> </div>
+              </div>
+              <div class="boxcont">
+                <div id="event_member">
+                  <table class="personIconList">
+                    <tbody>
+                      <tr>
+                           <%
+						   @join_user.each do |xid|
+						   %>
+                          <td class="personInfo"><div class="personIcon"><my:profile-pic uid="<%= xid %>" linked="true" /></div>
+                            <div class="personName"><my:name uid="<%= xid %>" linked="true" /></div></td>
+                           <% end %>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          
+<DIV class="box" id="userTalk">
+              <H3><span style="float:right"><%= link_to "所有留言", {:controller => :event, :action => :message, :id => @activity.id },:name => "message"%></span>留言板 </H3>
+              
+
+<input type="hidden" value='null'/>
+
+
+              
+               
+                        <FORM method="post" name="subjectForm1"  action="event/save_message">
+                   <DIV id="starttalkForm" style="DISPLAY: block">
+                    <input type="hidden" name="commit[reply_xid]"  id="commit[reply_xid]" value="" /> 
+				    <input type="hidden" name="commit[activity_id]" value="<%= @activity.id %>" /> 
+                    <textarea tabindex="1" rows="4" cols="100" id="commit[content]" name="commit[content]"></textarea>
+					<input type="submit" class="inputbutton" value="留言" />
+                  </DIV>
+                </FORM>
+		<%= render(:partial => "commit", :object => @message ) %>
+                  
+</DIV>
+ </div>
+        <div class="right" id="eventInfo">
+          <div class="box" id="eventSummary">
+           
+<div class="share-actions">
+	<%= link_to "分享",:controller => :event, :action => :share, :id => @activity.id %>
+</div>
+             
+          </div>
+          <div class="box">
+            <h3> 活动状态</h3>
+            <div class="boxcont">
+               <span  >
+                <div class="notice_event">
+                  <h4> <span ><%= @activity.join_user.length %></span> 人关注 / <span ><%= @activity.interest_user.length %></span> 人感兴趣</h4>
+                   <% if @my_activity && @my_activity.join %> 
+				         我已经关注了，<%= link_to "我不想关注了", :controller => :event, :action => :unjoin, :id => @activity.id %>
+				   <% else %>
+					   <input type="button" onclick="set_join(<%= @activity.id %>)" value="我要关注" > | 
+					   <% if @my_activity && @my_activity.interest %>
+					        <%= link_to "我不感兴趣了", :controller => :event, :action => :uninterest, :id => @activity.id %>
+					   <% else %>
+					        <%= link_to "我感兴趣", :controller => :event, :action => :interest, :id => @activity.id %>
+					   <% end %>
+				   <% end %> 
+                </div>
+                </span> 
+              
+            </div>
+          </div>
+          </div>
+      
+    </div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+    </div>

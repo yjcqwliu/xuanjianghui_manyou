@@ -1,0 +1,89 @@
+<div class="partylist" style="margin: 10px;border: 1px solid #CCCCCC;">
+
+											
+
+												<div class="timeline">
+													<%= partylist.start_time %>
+												</div>
+											
+									
+									<span id="table22085">
+
+										<div class="partytable">
+											
+											<table>
+												<tr>
+													<td class="tunaimage">
+														<%= link_to "<img src=\"http://uchome.developer.manyou.com/uchome/attachment/200901/23/965493_1232699385PaBa.png\" >", :controller => :event, :action => :show, :id => partylist.id %>
+														
+													</td>
+													<td class="eventinfo">
+														<table class="info_table">
+															<tbody>
+																<tr>
+																	<td colspan="2">
+																		<h4>
+																			<%= link_to partylist.act_subject, :controller => :event, :action => :show, :id => partylist.id %>																	</h4>																  </td>
+																</tr>
+																<tr>
+																	<td class="label">
+																		活动时间:																	</td>
+																	<td>
+																		<div class="datawrap"><%= partylist.start_time %> 至 <%= partylist.end_time %> </div>																	</td>
+																</tr>
+																<tr>
+																	<td class="label">
+																		活动地点:																	</td>
+																	<td>
+																		<div class="datawrap"><%= partylist.act_place %></div>																	</td>
+																</tr>
+																<tr>
+
+																	
+																		<td nowrap="nowrap" colspan="2">
+<% if partylist.start_time && partylist.start_time < Time.now
+         if partylist.end_time < Time.now %>
+		 <span style="color:red">该活动已经结束</span>
+		 <% else %>
+		 <span style="color:green">该活动正在进行</span>
+<% end %>
+<% else %>
+
+																			<span id="bu22085"
+																				style="display:">
+																				<div class="notice_event3 event_graybg">
+<span id="bu22085"
+																				style="display:">
+<% 
+				   @my_activity = @current_user.my_activity_find_by_id(partylist.id)
+				   if @my_activity && @my_activity.join %>
+				         我已经关注了，<%= link_to "我不想关注了", :controller => :event, :action => :unjoin, :id => partylist.id %>
+				   <% else %>
+					        <input type="button" onclick="set_join(<%= partylist.id %>)" value="我要关注" > | 
+					   <% if @my_activity && @my_activity.interest %>
+					        <%= link_to "我不感兴趣了", :controller => :event, :action => :uninterest, :id => partylist.id %>
+					   <% else %>
+					        <%= link_to "我感兴趣", :controller => :event, :action => :interest, :id => partylist.id %>
+					   <% end %>
+				   <% end %> |
+				   <%= link_to "分享",:controller => :event, :action => :share, :id => partylist.id %>
+																					<h4>
+
+																						已有
+																						<span id="countjoin022085"><%= partylist.join_user.length %></span>
+																						人参加 /
+																						<span id="countinterest022085"><%= partylist.interest_user.length %></span>
+																						人感兴趣																					</h4>
+																			</span></div></span>
+<% end %>   														</td>
+																</tr>
+															</tbody>
+														</table>
+													</td>
+												</tr>
+											</table>
+
+										</div> 
+									</span>
+									
+						                   </div>

@@ -1,0 +1,15 @@
+development:
+  api_key: 7bc6754b4a20457f4ed8e7aad90de750 
+  secret_key: d1a779a6b23f6c5131561731466a7081 
+  canvas_page_name: lpirate
+  callback_url: http://58.215.65.224:8888
+  tunnel:
+    public_host_username: 
+    public_host: 
+    public_port: 3333
+    local_port: 3000
+production:
+  api_key: 7bc6754b4a20457f4ed8e7aad90de750 
+  secret_key: d1a779a6b23f6c5131561731466a7081 
+  canvas_page_name: lpirate
+  callback_url: http://58.215.65.224:8888

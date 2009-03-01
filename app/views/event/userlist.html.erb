@@ -1,0 +1,27 @@
+<div id="content">
+				<div id="toc">
+					<p class="status">
+						(共
+						<span class="count"><%= @userlist.length %></span>人)
+					</p>
+					<p class="crumbs">
+						<%= link_to @activity.act_subject, :controller => :event, :action => :show, :id => @activity.id %><span
+							class="pipe"> / </span>成员列表
+					</p>
+				</div>
+</div>
+<div>
+  <center>
+  <%if @page.to_i > 1 then %>
+    <%= link_to "上一页", { :action => controller.action_name, :page => (@page.to_i - 1)}, {:class => "chn"} %>
+  <% else %>
+    上一页
+  <% end %>
+  &nbsp;
+  <%if @page.to_i < @userlist.total_pages then %>
+    <%= link_to "下一页", { :action => controller.action_name, :page => (@page.to_i + 1)}, {:class => "chn"} %>
+  <% else %>
+    下一页
+  <% end %>
+</center></div>
+<%= render(:partial => "user", :collection => @userlist ) %>
