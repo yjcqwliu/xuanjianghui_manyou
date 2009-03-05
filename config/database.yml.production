@@ -2,9 +2,9 @@
 #   gem install sqlite3-ruby (not necessary on OS X Leopard)
 production:
   adapter: mysql
-  database: xuanjianghui_production
+  database: xuanjianghui_production_my
   host: localhost
   username: root
-  password:
+  password: 123456
   encoding: utf8
   timeout: 5000
